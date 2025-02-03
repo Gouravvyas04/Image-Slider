@@ -1,3 +1,4 @@
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
@@ -11,8 +12,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    padding: 20px;
 }
 
+/* Scrollable Image Container */
 .container-scroll {
     display: flex;
     align-items: center;
@@ -23,9 +26,10 @@ body {
     position: relative;
 }
 
+/* Image List Wrapper */
 .container {
     display: flex;
-    width: 900px;
+    width: 100%;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 20px;
@@ -34,17 +38,21 @@ body {
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Hide scrollbar */
 .container::-webkit-scrollbar {
     display: none;
 }
 
+/* Image Grid */
 .container .img-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-gap: 20px;
     flex: none;
+    width: 100%;
 }
 
+/* Image Styling */
 .container .img-list .images {
     width: 100%;
     border-radius: 12px;
@@ -53,6 +61,7 @@ body {
     transition: all 0.4s ease-in-out;
 }
 
+/* Hover Effect */
 .container .img-list .images:hover {
     filter: grayscale(0);
     transform: scale(1.05);
@@ -60,14 +69,53 @@ body {
     cursor: pointer;
 }
 
+/* Navigation Buttons */
 .prev, .next {
     width: 50px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
     opacity: 0.7;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
+.prev { left: -60px; }
+.next { right: -60px; }
+
 .prev:hover, .next:hover {
-    transform: scale(1.2);
+    transform: scale(1.2) translateY(-50%);
     opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+    }
+    
+    .container-scroll {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .container .img-list {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-gap: 15px;
+    }
+
+    .prev, .next {
+        width: 40px;
+        top: auto;
+        bottom: -50px;
+        position: relative;
+    }
+
+    .prev { left: 0; }
+    .next { right: 0; }
 }
